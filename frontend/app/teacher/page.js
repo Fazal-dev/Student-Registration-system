@@ -18,17 +18,11 @@ import { deleteStudent, getStudents } from "@/lib/student";
 import { errorMessage, successMessage } from "@/lib/utils";
 import StudentDetails from "@/components/StudentDetails";
 import { useRouter } from "next/navigation";
-import {
-  getUserId,
-  getUserRole,
-  LogoutUser,
-  setToken,
-  setUserId,
-  setUserRole,
-} from "@/lib/auth";
+import { getUserId, getUserRole, LogoutUser } from "@/lib/auth";
 import { Loader2, LogOut, PencilLine, Trash2 } from "lucide-react";
+import withAuth from "@/components/withAuth";
 
-export default function Teacher() {
+function Teacher() {
   const [students, setStudents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
@@ -52,11 +46,7 @@ export default function Teacher() {
   };
 
   useEffect(() => {
-    if (!getUserId() || getUserRole() == "student") {
-      router.push("/login");
-    } else {
-      fetchStudents();
-    }
+    fetchStudents();
   }, [router]);
 
   const openEdit = (student) => {
@@ -176,3 +166,5 @@ export default function Teacher() {
     </div>
   );
 }
+
+export default withAuth(Teacher, "teacher");

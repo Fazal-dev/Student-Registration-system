@@ -1,6 +1,11 @@
 import User from "../models/User.js";
 import { sendEmail } from "../mail/mail.js";
-import { generateToken } from "../utility/index.js";
+import {
+  generateToken,
+  getUser,
+  hashPassword,
+  isUserAuthenticated,
+} from "../utility/index.js";
 
 export const loginUser = async (req, res) => {
   const { email, password } = req.body;
@@ -40,7 +45,7 @@ export const signUpUser = async (req, res) => {
       });
     }
 
-    const hashPassword = await hashPassword(password);
+    const hashedPassword = await hashPassword(password);
 
     const user = await User.create({
       firstName,
@@ -48,7 +53,7 @@ export const signUpUser = async (req, res) => {
       age,
       role,
       email,
-      password: hashPassword,
+      password: hashedPassword,
     });
 
     if (role == "student") {
@@ -63,6 +68,9 @@ export const signUpUser = async (req, res) => {
       email: user.email,
     });
   } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
+    res.status(201).json({
+      status: false,
+      message: "Internal server error",
+    });
   }
 };

@@ -12,18 +12,12 @@ import { useEffect, useState } from "react";
 import StudentSubjectForm from "@/components/StudentSubjectForm";
 import StudentProfileForm from "@/components/StudentProfileForm";
 import { useRouter } from "next/navigation";
-import {
-  getUserId,
-  getUserRole,
-  LogoutUser,
-  setToken,
-  setUserId,
-  setUserRole,
-} from "@/lib/auth";
+import { getUserId, LogoutUser } from "@/lib/auth";
 import { getProfilePic, uploadProfilePic } from "@/lib/student";
 import { errorMessage, successMessage } from "@/lib/utils";
+import withAuth from "@/components/withAuth";
 
-export default function Student() {
+function Student() {
   const router = useRouter();
   const [open, setOpen] = useState(false);
   const [subjects, setSubject] = useState([]);
@@ -55,11 +49,7 @@ export default function Student() {
   };
 
   useEffect(() => {
-    if (!getUserId() || getUserRole() == "teacher") {
-      router.push("/login");
-    } else {
-      fetchProfilePic();
-    }
+    fetchProfilePic();
   }, [router]);
 
   const handleLogout = () => {
@@ -173,3 +163,4 @@ export default function Student() {
     </div>
   );
 }
+export default withAuth(Student, "student");
