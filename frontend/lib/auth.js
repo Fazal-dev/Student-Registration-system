@@ -53,7 +53,7 @@ export async function SigupUser(data) {
 }
 
 export async function LogoutUser() {
-  setUserRole("");
-  setUserId("");
-  setToken("");
+  localStorage.removeItem("user_token");
+  localStorage.removeItem("role");
+  localStorage.removeItem("user_id");
 }

@@ -1,3 +1,4 @@
+import { getUserId } from "./auth.js";
 import environment from "./environment.js";
 
 export async function getStudents() {
@@ -39,7 +40,8 @@ export async function uploadProfilePic(data) {
   return await res.json();
 }
 
-export async function getProfilePic(id) {
+export async function getProfilePic() {
+  const id = getUserId();
   const res = await fetch(`${environment.baseUrl}api/student/${id}/profile`, {
     method: "POST",
   });

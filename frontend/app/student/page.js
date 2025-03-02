@@ -25,23 +25,17 @@ function Student() {
   const [isLoading, setIsLoading] = useState(false);
 
   const fetchProfilePic = async () => {
-    const userId = getUserId();
-    const res = await getProfilePic(userId);
-
+    const res = await getProfilePic();
     const contentType = res.headers.get("Content-Type");
-
     if (contentType && contentType.startsWith("image")) {
       const blob = await res.blob();
       const reader = new FileReader();
-
       reader.onloadend = () => {
         setProfilePic(reader.result);
       };
-
       reader.readAsDataURL(blob);
     } else {
       const data = await res.json();
-
       if (!data.status || data.data === null) {
         setProfilePic("/profle.png");
       }
