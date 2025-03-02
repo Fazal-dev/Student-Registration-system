@@ -1,6 +1,8 @@
 import { Geist, Geist_Mono } from "next/font/google";
 import { Toaster } from "react-hot-toast";
 import "./globals.css";
+import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -21,7 +23,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased `}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen bg-gradient-to-br from-gray-300 via-gray-200 to-white `}
       >
         <Toaster
           toastOptions={{
@@ -34,6 +36,17 @@ export default function RootLayout({ children }) {
           }}
           position="top-right"
         />
+
+        <div>
+          <Link className="text-black" href={"/"}>
+            <img
+              width={100}
+              height={100}
+              style={{ borderRadius: "50%" }}
+              src="/logo.png"
+            />
+          </Link>
+        </div>
 
         {children}
       </body>

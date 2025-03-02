@@ -2,10 +2,11 @@
 
 import Link from "next/link";
 import { Lock } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export default function ForbiddenPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-6">
+    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-gray-300 via-gray-200 to-white p-6">
       <div className="max-w-md w-full bg-white shadow-lg rounded-lg p-6 text-center">
         <div className="flex justify-center">
           <Lock className="h-16 w-16 text-red-500" />
@@ -17,9 +18,12 @@ export default function ForbiddenPage() {
           You don't have permission to access this page.
         </p>
         <Link href="/">
-          <button className="mt-6 text-white px-5 py-2 rounded-md transition">
+          <Button
+            type="button"
+            className="mt-6  px-5 py-2 rounded-md transition"
+          >
             Go Home
-          </button>
+          </Button>
         </Link>
       </div>
     </div>
