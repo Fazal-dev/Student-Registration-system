@@ -22,5 +22,8 @@ export const getUserById = async (id) => {
 
 export const isUserAuthenticated = async (email, password) => {
   const user = await getUser(email);
-  return bcrypt.compare(password, user.password);
+  if (user) {
+    return bcrypt.compare(password, user.password);
+  }
+  return false;
 };
