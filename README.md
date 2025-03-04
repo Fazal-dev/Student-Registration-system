@@ -4,6 +4,8 @@
 
 The **Student Registration System** is a web application designed to facilitate student registration and management. It consists of a **Next.js** frontend and an **Express.js** backend, providing a seamless and efficient user experience.
 
+![Home page](assets/home.PNG)
+
 ## Features
 
 - User authentication (Registration & Login)
