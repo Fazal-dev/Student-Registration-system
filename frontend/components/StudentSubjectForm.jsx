@@ -20,9 +20,10 @@ import {
 import { z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import environment from "@/lib/environment";
 import toast from "react-hot-toast";
 import { useEffect } from "react";
+import { updateStudent } from "@/lib/student";
+import { getUserId } from "@/lib/auth";
 
 const FormSchema = z.object({
   Mathematics: z
@@ -80,16 +81,10 @@ export default function StudentSubjectForm({ setOpen, open, subjects }) {
       subjects: subjectsArray,
     };
 
-    const user_id = localStorage.getItem("user_id");
+    const user_id = getUserId();
 
     try {
-      const res = await fetch(`${environment.baseUrl}api/student/${user_id}`, {
-        method: "PATCH",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(formattedData),
-      });
-
-      const result = await res.json();
+      const result = await updateStudent(user_id, formattedData);
 
       if (result.status) {
         toast.success(result.message);
