@@ -24,7 +24,8 @@ import toast from "react-hot-toast";
 import { useEffect } from "react";
 import { updateStudent } from "@/lib/student";
 import { getUserId } from "@/lib/auth";
-
+import { subjectNamesArray } from "@/lib/constants";
+import { mapSubjectsWithMarks } from "@/lib/utils";
 const FormSchema = z.object({
   Mathematics: z
     .number()
@@ -40,17 +41,7 @@ const FormSchema = z.object({
   ComputerScience: z.number().min(0).max(100),
 });
 export default function StudentSubjectForm({ setOpen, open, subjects }) {
-  const subjectNames = [
-    "Mathematics",
-    "Science",
-    "English",
-    "History",
-    "Geography",
-    "Physics",
-    "Chemistry",
-    "Biology",
-    "ComputerScience",
-  ];
+  const subjectNames = subjectNamesArray;
 
   const form = useForm({
     resolver: zodResolver(FormSchema),
@@ -72,10 +63,7 @@ export default function StudentSubjectForm({ setOpen, open, subjects }) {
 
   // Handle Edit Student
   async function onSubmit(data) {
-    const subjectsArray = subjectNames.map((subject) => ({
-      subjectName: subject,
-      mark: Number(data[subject]),
-    }));
+    const subjectsArray = mapSubjectsWithMarks(data, subjectNames);
 
     const formattedData = {
       subjects: subjectsArray,

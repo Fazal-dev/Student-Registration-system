@@ -13,3 +13,10 @@ export function successMessage(message) {
 export function errorMessage(message) {
   return toast.error(message);
 }
+
+export function mapSubjectsWithMarks(data, subjectNames) {
+  return subjectNames.map((subject) => ({
+    subjectName: subject,
+    mark: Number(data[subject]),
+  }));
+}

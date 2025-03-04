@@ -12,7 +12,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
@@ -37,7 +37,7 @@ const FormSchema = z.object({
 });
 
 export default function StudentProfileForm({ setSubject }) {
-  const router = useRouter();
+  const [user_id, setUserId] = useState(null);
   const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
@@ -49,13 +49,8 @@ export default function StudentProfileForm({ setSubject }) {
   });
 
   const fetchUser = async () => {
-    const user_id = getUserId();
-
-    if (!getUserId()) {
-      router.push("/login");
-    }
-
-    const result = await getStudent(user_id);
+    const id = getUserId();
+    const result = await getStudent(id);
     const data = result.data[0];
     setSubject(data?.subjects);
 
@@ -68,16 +63,12 @@ export default function StudentProfileForm({ setSubject }) {
   };
 
   useEffect(() => {
-    if (!getUserId()) {
-      router.push("/login");
-    } else {
-      fetchUser();
-    }
-  }, [router]);
+    const user_id = getUserId();
+    setUserId(user_id);
+    fetchUser();
+  }, []);
 
   async function onSubmit(data) {
-    const user_id = getUserId();
-
     try {
       const result = await updateStudent(user_id, data);
       if (result.status) {

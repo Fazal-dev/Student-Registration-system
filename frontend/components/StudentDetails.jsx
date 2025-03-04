@@ -24,8 +24,13 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { updateStudent } from "@/lib/student";
-import { errorMessage, successMessage } from "@/lib/utils";
+import {
+  errorMessage,
+  mapSubjectsWithMarks,
+  successMessage,
+} from "@/lib/utils";
 import { useEffect } from "react";
+import { subjectNamesArray } from "@/lib/constants";
 
 const FormSchema = z.object({
   firstName: z
@@ -59,17 +64,7 @@ export default function StudentDetails({
   student,
   fetchStudents,
 }) {
-  const subjectNames = [
-    "Mathematics",
-    "Science",
-    "English",
-    "History",
-    "Geography",
-    "Physics",
-    "Chemistry",
-    "Biology",
-    "ComputerScience",
-  ];
+  const subjectNames = subjectNamesArray;
 
   const form = useForm({
     resolver: zodResolver(FormSchema),
@@ -103,10 +98,7 @@ export default function StudentDetails({
   async function onSubmit(data) {
     if (!student) return;
 
-    const subjectsArray = subjectNames.map((subject) => ({
-      subjectName: subject,
-      mark: Number(data[subject]),
-    }));
+    const subjectsArray = mapSubjectsWithMarks(data, subjectNames);
 
     const formattedData = {
       firstName: data.firstName,
