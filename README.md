@@ -12,7 +12,7 @@ The **Student Registration System** is a web application designed to facilitate 
 - Admin dashboard for student management
 - Secure API endpoints
 
-![Profile of student](assets/studenProfile.png)
+![Profile of student](assets/studenProfile.PNG)
 
 ## Technologies Used
 
@@ -58,7 +58,7 @@ The **Student Registration System** is a web application designed to facilitate 
    ```
 4. Start the backend server:
    ```sh
-   npm run dev
+   npm start
    ```
 
 ### Frontend Setup
