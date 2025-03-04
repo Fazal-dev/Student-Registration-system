@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Student Registration System
 
-## Getting Started
+## Overview
 
-First, run the development server:
+The **Student Registration System** is a web application designed to facilitate student registration and management. It consists of a **Next.js** frontend and an **Express.js** backend, providing a seamless and efficient user experience.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Features
+
+- User authentication (Registration & Login)
+- Student profile management
+- Student profile picture upload
+- Admin dashboard for student management
+- Secure API endpoints
+
+![Profile of student](assets/studenProfile.png)
+
+## Technologies Used
+
+### Frontend (Next.js framwork)
+
+- React & Next.js
+- Tailwind CSS (for styling)
+- Shadcn UI library (for ui Components)
+- Fetch (for API requests)
+- zod (for form validation)
+
+### Backend (Express.js)
+
+- Node.js & Express.js
+- MongoDB & Mongoose (for database management)
+- JWT (for authentication)
+- bcrypt (for password hashing)
+- dotenv (for environment variables)
+
+## Installation & Setup
+
+### Prerequisites
+
+- Node.js installed
+- MongoDB installed or a MongoDB Atlas database
+
+### Backend Setup
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/Fazal-dev/Student-Registration-system.git
+   cd student-registration-system/backend
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Create a `.env` file in the `backend` directory and add the following:
+   ```env
+   PORT=5000
+   MONGO_URI=your_mongodb_connection_string
+   JWT_SECRET=your_jwt_secret
+   ```
+4. Start the backend server:
+   ```sh
+   npm run dev
+   ```
+
+### Frontend Setup
+
+1. Navigate to the frontend folder:
+   ```sh
+   cd ./frontend
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the frontend server:
+   ```sh
+   npm run dev
+   ```
+
+## Running in Production
+
+To run in production, build the frontend and serve it with the backend:
+
+```sh
+cd ./frontend
+npm run build
+npm run export
+cd ./backend
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## License
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+This project is licensed under Fazal mohamed
