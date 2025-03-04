@@ -1,4 +1,4 @@
-# Student Registration System
+# Student Registration System (Quick entroll)
 
 ## Overview
 
